@@ -1,0 +1,28 @@
+import sauce
+client = sauce.Sauce('pawel-sauce', 'e0a5bf63-8ec7-4914-906f-0e7edf870294')
+client.jobs.get_job('296aa9e1f78444469ea346c89aa8b351')
+client.jobs.get_user_jobs()
+client.jobs.get_build_jobs('build-id')
+
+import sauce
+client = sauce.Sauce()
+client.jobs.get_job('cd1073bf8f6b44a6918e959cff1815cf', hmac='6b9c37f303c7b0313443f5dee09a1546')
+
+
+import sauce
+client = sauce.Sauce('pawel-sauce', 'e0a5bf63-8ec7-4914-906f-0e7edf870294')
+client.jobs.get_job('e1583684b5c9495cb78f02dea4f87519')
+client.jobs.get_user_jobs(limit=1)
+
+import sauce
+client = sauce.Sauce('pawel-sauce', 'e0a5bf63-8ec7-4914-906f-0e7edf870294')
+
+
+/v1/{username}/builds/{id}/failed-jobs
+
+import sauce
+client = sauce.Sauce('pawel-sauce', 'e0a5bf63-8ec7-4914-906f-0e7edf870294')
+client.analytics.get_test_metrics(time_range='-6d')
+
+pageWeight
+firstMeaningfulPaint

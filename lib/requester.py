@@ -3,6 +3,8 @@ import requests
 import urllib
 from requests.auth import HTTPBasicAuth
 
+from lib.exceptions import InvalidApiUrlException
+
 METHOD_TO_FUNCTION = {
     'GET': requests.get,
     'PUT': requests.put,
@@ -21,16 +23,19 @@ class Requester:
         url = urllib.parse.urljoin(self._base_api_url, 'rest' + endpoint['url'])
         method = endpoint['method']
         body = body and json.dumps(body) or None
-        response = METHOD_TO_FUNCTION[method](
-            url,
-            auth=self._auth,
-            headers={'content-type': 'application/json'},
-            data=body,
-            params=self._params(hmac, query_params))
         try:
+            response = METHOD_TO_FUNCTION[method](
+                url,
+                auth=self._auth,
+                headers={'content-type': 'application/json'},
+                data=body,
+                params=self._params(hmac, query_params))
+            print(response.url)
             return response.json()
         except json.decoder.JSONDecodeError:
             return response.text
+        except Exception as e:
+            raise InvalidApiUrlException(str(e))
 
     @staticmethod
     def _auth(username, password):
